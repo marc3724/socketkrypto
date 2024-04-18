@@ -7,11 +7,11 @@ nonce = b"ZErhvervsakademi"
 
 crypto_handler = CryptoHandler(keyword, nonce)
 
-
 def handle_client(client_socket, addr):
     try:
         while True:
             encryptedMessage = client_socket.recv(1024)
+            print(f"base64 encrypted message: {encryptedMessage}")
             request = crypto_handler.decrypt_message(base64_decode(encryptedMessage))
             # receive, decrypt and print client messages
             if request.lower() == "close":
@@ -29,7 +29,6 @@ def handle_client(client_socket, addr):
     finally:
         client_socket.close()
         print(f"Connection to client ({addr[0]}:{addr[1]}) closed")
-
 
 def run_server():
     server_ip = "127.0.0.1"  # server hostname or IP address
@@ -55,5 +54,6 @@ def run_server():
     finally:
         server.close()
 
-
 run_server()
+
+

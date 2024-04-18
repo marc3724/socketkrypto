@@ -15,15 +15,14 @@ def run_client():
     server_port = 8000  # replace with the server's port number
     # establish connection with server
     client.connect((server_ip, server_port))
+    print("Connected to server")
 
     try:
         while True:
             # get input message from user and send it to the server
             msg = input("Enter message: ")
             encrypted_message = crypto_handler.encrypt_message(msg)
-            print("message encryptec")
             client.send(base64_encode(encrypted_message))
-            print("message sent")
 
             # receive message from the server
             response = client.recv(1024)
@@ -44,3 +43,5 @@ def run_client():
 
 
 run_client()
+
+
