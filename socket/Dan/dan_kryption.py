@@ -2,6 +2,7 @@ from Crypto.Cipher import AES
 from Crypto.Util.Padding import pad, unpad
 import base64
 
+
 class CryptoHandler:
     def __init__(self, keyword, nonce):
         self.keyword = keyword
@@ -19,8 +20,10 @@ class CryptoHandler:
         decrypted_message = unpad(cipher.decrypt(encrypted_message), AES.block_size)
         return decrypted_message.decode('utf-8')
 
+
 def base64_encode(data):
     return base64.b64encode(data)
+
 
 def base64_decode(data):
     return base64.b64decode(data)

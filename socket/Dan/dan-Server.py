@@ -1,7 +1,7 @@
 import socket
 import threading
 
-from kryption import CryptoHandler, base64_decode, base64_encode
+from dan_kryption import CryptoHandler, base64_decode, base64_encode
 
 keyword = b"IT-Sikkerhed_PBA"
 nonce = b"ZErhvervsakademi"

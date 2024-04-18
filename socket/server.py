@@ -1,20 +1,29 @@
 import socket
 import threading
-
 from kryption import CryptoHandler, base64_decode, base64_encode
+
+keyword = b"IT-Sikkerhed_PBA"
+nonce = b"ZErhvervsakademi"
+
+crypto_handler = CryptoHandler(keyword, nonce)
+
 
 def handle_client(client_socket, addr):
     try:
         while True:
-            # receive and print client messages
-            request = client_socket.recv(1024).decode("utf-8")
+            encryptedMessage = client_socket.recv(1024)
+            request = crypto_handler.decrypt_message(base64_decode(encryptedMessage))
+            # receive, decrypt and print client messages
             if request.lower() == "close":
                 client_socket.send("closed".encode("utf-8"))
                 break
             print(f"Received from {addr}: {request}")
+
             # convert and send accept response to the client
             response = "accepted"
-            client_socket.send(response.encode("utf-8"))
+            encrypted_response = crypto_handler.encrypt_message(response)
+            client_socket.send(base64_encode(encrypted_response))
+
     except Exception as e:
         print(f"Error when hanlding client: {e}")
     finally:

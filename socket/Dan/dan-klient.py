@@ -1,5 +1,5 @@
 import socket
-from kryption import CryptoHandler, base64_encode, base64_decode
+from dan_kryption import CryptoHandler, base64_encode, base64_decode
 
 keyword = b"IT-Sikkerhed_PBA"
 nonce = b"ZErhvervsakademi"
@@ -20,7 +20,6 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as client_socket:
 
         encrypted_message = crypto_handler.encrypt_message(message)
         client_socket.sendall(base64_encode(encrypted_message))
-
 
         received_data = client_socket.recv(1024)
 
