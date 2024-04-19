@@ -6,12 +6,11 @@ nonce = b"ZErhvervsakademi"
 
 crypto_handler = CryptoHandler(keyword, nonce)
 
-
-def run_client():
+def run_client(data):
     # create a socket object
     client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-    server_ip = "127.0.0.1"  # replace with the server's IP address
+    server_ip = "192.168.68.100"  # replace with the server's IP address
     server_port = 8000  # replace with the server's port number
     # establish connection with server
     client.connect((server_ip, server_port))
@@ -20,7 +19,8 @@ def run_client():
     try:
         while True:
             # get input message from user and send it to the server
-            msg = input("Enter message: ")
+            #msg = input("Enter message: ")
+            msg = data
             encrypted_message = crypto_handler.encrypt_message(msg)
             client.send(base64_encode(encrypted_message))
 
@@ -42,6 +42,6 @@ def run_client():
         print("Connection to server closed")
 
 
-run_client()
+#run_client()
 
 

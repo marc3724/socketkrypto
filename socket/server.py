@@ -1,7 +1,6 @@
 import socket
 import threading
 from kryption import CryptoHandler, base64_decode, base64_encode
-
 keyword = b"IT-Sikkerhed_PBA"
 nonce = b"ZErhvervsakademi"
 
@@ -25,13 +24,13 @@ def handle_client(client_socket, addr):
             client_socket.send(base64_encode(encrypted_response))
 
     except Exception as e:
-        print(f"Error when hanlding client: {e}")
+        print(f"Error when handling client: {e}")
     finally:
         client_socket.close()
         print(f"Connection to client ({addr[0]}:{addr[1]}) closed")
 
 def run_server():
-    server_ip = "127.0.0.1"  # server hostname or IP address
+    server_ip = "192.168.68.100"  # server hostname or IP address
     port = 8000  # server port number
     # create a socket object
     try:
